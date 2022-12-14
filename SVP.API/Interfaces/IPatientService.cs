@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SVP.API.Entities;
 
 namespace SVP.API.Interfaces;
@@ -11,7 +12,7 @@ public partial interface ISVPService
 
     public Task<Patient> EditPatient(Patient patient);
     
-    public Task<Patient> DeletePatient(long patientId);
+    public Task DeletePatient(long patientId);
 
     public Task<bool> NeedToHospitalization();
 

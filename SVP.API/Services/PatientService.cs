@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SVP.API.Data;
 using SVP.API.Entities;
 using SVP.API.Interfaces;
@@ -14,25 +16,40 @@ public partial class SVPService: ISVPService
         _context = context;
     }
 
-
     public async Task<Patient> GetPatientById(long patientId)
     {
-        throw new System.NotImplementedException();
+        var patient = await _context.Patients
+            .FirstOrDefaultAsync(x => x.Id == patientId
+            );
+        
+        return patient;
     }
 
     public async Task<Patient> AddPatient(Patient patient)
     {
-        throw new System.NotImplementedException();
+        await _context.Patients.AddAsync(patient);
+        await _context.SaveChangesAsync();
+        return patient;
     }
 
     public async Task<Patient> EditPatient(Patient patient)
     {
-        throw new System.NotImplementedException();
+        var _patient = await _context.Patients
+            .FirstOrDefaultAsync(x => x.Id == patient.Id);
+        _patient = patient;
+        await _context.SaveChangesAsync();
+        return _patient;
     }
 
-    public async Task<Patient> DeletePatient(long patientId)
+    public async Task DeletePatient(long patientId)
     {
-        throw new System.NotImplementedException();
+        var patient = await _context.Patients
+            .FirstOrDefaultAsync(x => x.Id == patientId);
+        if (patient is not null)
+        {
+            _context.Patients.Remove(patient);
+            await _context.SaveChangesAsync();
+        }
     }
 
     public async Task<bool> NeedToHospitalization()
