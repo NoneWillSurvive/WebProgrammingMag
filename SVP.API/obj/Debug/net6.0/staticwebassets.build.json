@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "tGgqcvKKtIFKqeLhKDougWXBlLwDx7NlpzzbN9ULK+Q=",
+  "Source": "SVP.API",
+  "BasePath": "_content/SVP.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
