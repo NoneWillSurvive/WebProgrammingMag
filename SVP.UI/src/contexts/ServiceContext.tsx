@@ -1,7 +1,7 @@
 import {createContext} from "react";
-import {DoctorService} from "../service/doctor.service";
-import {PatientService} from "../service/patient.service";
-import {IllnessService} from "../service/illness.service";
+import {DoctorService} from "../services/doctor.service";
+import {PatientService} from "../services/patient.service";
+import {IllnessService} from "../services/illness.service";
 
 interface IServiceContext {
     doctorApi: InstanceType<typeof DoctorService>

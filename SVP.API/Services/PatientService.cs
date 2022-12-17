@@ -19,6 +19,8 @@ public partial class SVPService: ISVPService
     public async Task<Patient> GetPatientById(long patientId)
     {
         var patient = await _context.Patients
+            .Include(x => x.Illness)
+            .Include(x => x.RecommendedDoctor)
             .FirstOrDefaultAsync(x => x.Id == patientId
             );
         

@@ -18,7 +18,7 @@ public class SVPController : Controller
 
 
     [HttpGet]
-    public async Task<ActionResult<Patient>> GetOatientById(long patientId)
+    public async Task<ActionResult<Patient>> GetPatientById(long patientId)
     {
         return Ok(await _service.GetPatientById(patientId));
     }
