@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SVP.API.Entities;
+using SVP.API.Interfaces;
 
 namespace SVP.API.Services;
 

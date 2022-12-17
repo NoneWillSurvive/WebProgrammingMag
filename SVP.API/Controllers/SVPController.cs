@@ -38,7 +38,8 @@ public class SVPController : Controller
     [HttpDelete]
     public async Task<ActionResult> DeletePatient(long patientId)
     {
-        return Ok(await _service.DeletePatient(patientId));
+        await _service.DeletePatient(patientId);
+        return Ok();
     }
 
     // [HttpGet]
