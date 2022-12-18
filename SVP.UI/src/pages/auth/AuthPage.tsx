@@ -2,15 +2,15 @@ import React, {useState} from 'react';
 import {Button} from "antd";
 import AuthForm from "./authForm";
 import {MedicineBoxOutlined, UserOutlined} from "@ant-design/icons";
+import {AuthModel} from "../../models/auth.model";
+import {useHistory} from "react-router-dom";
 
-interface AuthProps {
-    setAuthorizedId: (id: number) => void
-}
+const AuthPage = (props: AuthModel.PageProps) => {
 
-const AuthPage = (props: AuthProps) => {
 
     const [choseAuthRole, setChoseAuthRole] = useState(false);
     const [isPatient, setIsPatient] = useState(true);
+    const history = useHistory();
 
     const chooseRolePatient = () => {
         setIsPatient(true)
@@ -33,8 +33,23 @@ const AuthPage = (props: AuthProps) => {
         </div>
     }
 
+    const setAuthId = (id: number) => {
+        let currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() + 3);
+        const obj = {
+            value: true,
+            timestamp: currentDate
+        }
+        window.localStorage.setItem("isAuthUser", JSON.stringify(obj))
+        if (isPatient) {
+            history.push(`patient/${id}`);
+        } else {
+            history.push(`doctor/${id}`);
+        }
+    }
+
     return (
-        <AuthForm setAuthorizedId={props.setAuthorizedId} isPatient={isPatient}/>
+        <AuthForm setUserAuthorizedId={setAuthId} isPatient={isPatient}/>
     );
 };
 

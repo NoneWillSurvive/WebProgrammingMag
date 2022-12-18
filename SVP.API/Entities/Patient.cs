@@ -13,6 +13,8 @@ public class Patient
     
     public byte Age { get; set; }
     
+    public string Name { get; set; }
+    
     public Illness Illness { get; set; }
     
     [Comment("Уровень тревоги")]

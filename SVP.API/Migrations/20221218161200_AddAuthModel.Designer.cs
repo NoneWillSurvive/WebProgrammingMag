@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SVP.API.Data;
@@ -11,9 +12,10 @@ using SVP.API.Data;
 namespace SVP.API.Migrations
 {
     [DbContext(typeof(SVPContext))]
-    partial class SVPContextModelSnapshot : ModelSnapshot
+    [Migration("20221218161200_AddAuthModel")]
+    partial class AddAuthModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,19 +29,13 @@ namespace SVP.API.Migrations
                     b.Property<string>("Login")
                         .HasColumnType("text");
 
-                    b.Property<long?>("DoctorId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<long?>("PatientId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Login");
-
-                    b.HasIndex("DoctorId");
 
                     b.HasIndex("PatientId");
 
@@ -118,9 +114,6 @@ namespace SVP.API.Migrations
                         .HasColumnType("smallint")
                         .HasComment("Уровень безнадежности");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
                     b.Property<bool>("NeedHospitalization")
                         .HasColumnType("boolean")
                         .HasComment("Есть ли зависимость");
@@ -139,15 +132,9 @@ namespace SVP.API.Migrations
 
             modelBuilder.Entity("SVP.API.Entities.AuthData", b =>
                 {
-                    b.HasOne("SVP.API.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId");
-
                     b.HasOne("SVP.API.Entities.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId");
-
-                    b.Navigation("Doctor");
 
                     b.Navigation("Patient");
                 });

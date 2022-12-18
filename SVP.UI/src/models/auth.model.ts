@@ -1,11 +1,11 @@
 export declare module AuthModel {
 
     export interface PageProps {
-        setAuthorizedId: (id: number) => void
+
     }
 
     export interface FormProps {
-        setAuthorizedId: (id: number) => void
+        setUserAuthorizedId: (id: number) => void
         isPatient: boolean
     }
 

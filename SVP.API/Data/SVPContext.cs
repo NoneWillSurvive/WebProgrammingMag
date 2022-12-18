@@ -11,6 +11,8 @@ public class SVPContext: DbContext
     public virtual DbSet<Doctor> Doctors { get; set; }
     
     public virtual DbSet<Illness> Illnesses { get; set; }
+    
+    public virtual DbSet<AuthData> AuthData { get; set; }
 
     public SVPContext(DbContextOptions<SVPContext> options) : base(options)
     {

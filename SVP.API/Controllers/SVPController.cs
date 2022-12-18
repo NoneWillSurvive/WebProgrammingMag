@@ -42,11 +42,26 @@ public class SVPController : Controller
         return Ok();
     }
 
-    // [HttpGet]
-    // public Task<bool> NeedToHospitalization()
-    // {
-    //     return Ok();
-    // }
+    [HttpGet]
+    public async Task<ActionResult<Patient>> CheckAuthUser(bool isPatient, string login, string password)
+    {
+        return Ok(await _service.CheckLogInUser(isPatient, login, password));
+    }
+    
+    [HttpPost]
+    public async Task<ActionResult<long>> RegistrateUser(
+        bool isPatient,
+        string login, 
+        string password,
+        string userName, 
+        byte age, 
+        bool gender
+    ) 
+    {
+        return Ok(await _service.RegistationUser(
+            isPatient, login, password, userName, age, gender
+        ));
+    }
 
     // [HttpGet]
     // public Task<Doctor> GetRecommendedDoctorByPatientId()

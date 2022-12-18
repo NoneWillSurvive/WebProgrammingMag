@@ -1,18 +1,26 @@
-import React, {useMemo} from 'react';
+import React, {useContext, useMemo} from 'react';
 import {AuthModel} from "../../../models/auth.model";
-import {Tabs} from "antd";
+import {message, Tabs} from "antd";
 import SignInForm from "./SignInForm";
 import RegistrationForm from "./RegistrationForm";
+import {ServiceContext} from "../../../contexts/ServiceContext";
 
 const TAB_KEY_SIGN_IN = "signIn";
 const TAB_KEY_REGISTRATION = "reg";
 
 const AuthForm = (props: AuthModel.FormProps): React.ReactElement => {
 
-    const onFinishSignInForm = (login: string, password: string) => {
+    const {authApi} = useContext(ServiceContext);
+    const onFinishSignInForm = async (login: string, password: string) => {
+
         console.log(`onFinishSignInForm \n login: ${login}, password: ${password}`);
-        // TODO: сделать запрос на бэк, вернуть пользователя, изменить url
-        props.setAuthorizedId(0)
+
+        try {
+            const response = await authApi.CheckAuthUser(props.isPatient, login, password);
+            props.setUserAuthorizedId(response)
+        } catch (e) {
+            message.error("Неверный логин или пароль.")
+        }
     }
 
     const tabsItems = useMemo(() => [
