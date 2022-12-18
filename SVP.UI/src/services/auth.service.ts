@@ -9,7 +9,7 @@ export class AuthService {
     }
 
     async CheckAuthUser(isPatient: boolean, login: string, password: string): Promise<number> {
-        return await axios.get(this.apiUrl + "api/SVP/CheckAuthUser", {
+        return await axios.get(this.apiUrl + "CheckAuthUser", {
             params: {
                 isPatient,
                 login,

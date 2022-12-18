@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace SVP.API.Entities;
 
@@ -9,6 +11,7 @@ public class Doctor
     
     public string Name { get; set; }
 
-    public string Quaification { get; set; }
+    [Comment("Список квалификаций, описаны через запятую с пробелом")]
+    public string Qualification { get; set; }
     
 }

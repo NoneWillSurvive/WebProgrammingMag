@@ -10,7 +10,7 @@ import {AuthService} from "../services/auth.service";
 
 const App = () => {
 
-    const baseUrl = "/", apiUrl = "/";
+    const baseUrl = "/", apiUrl = "/api/SVP/";
 
     useEffect(() => {
         type localStorageObj = { value: boolean, timestamp: Date };

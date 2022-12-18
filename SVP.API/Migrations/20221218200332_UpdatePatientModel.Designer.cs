@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SVP.API.Data;
@@ -11,9 +12,10 @@ using SVP.API.Data;
 namespace SVP.API.Migrations
 {
     [DbContext(typeof(SVPContext))]
-    partial class SVPContextModelSnapshot : ModelSnapshot
+    [Migration("20221218200332_UpdatePatientModel")]
+    partial class UpdatePatientModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,9 +59,8 @@ namespace SVP.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("Qualification")
-                        .HasColumnType("text")
-                        .HasComment("Список квалификаций, описаны через запятую");
+                    b.Property<string>("Quaification")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -78,9 +79,6 @@ namespace SVP.API.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Type")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

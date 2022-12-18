@@ -11,4 +11,6 @@ public class Illness
 
     public string CodeMKB { get; set; }
     
+    public string Type { get; set; }
+    
 }

@@ -30,6 +30,9 @@ public class Patient
     public byte LevelAsthenicSyndrome { get; set; }
 
     [Comment("Есть ли зависимость")]
+    public bool HasAddiction { get; set; }
+    
+    [Comment("Нужна ли госпитализация")]
     public bool NeedHospitalization { get; set; }
     
     [Comment("Рекомендуемый врач")]
