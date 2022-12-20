@@ -59,7 +59,7 @@ namespace SVP.API.Migrations
 
                     b.Property<string>("Qualification")
                         .HasColumnType("text")
-                        .HasComment("Список квалификаций, описаны через запятую");
+                        .HasComment("Список квалификаций, описаны через запятую с пробелом");
 
                     b.HasKey("Id");
 

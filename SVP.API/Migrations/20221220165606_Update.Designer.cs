@@ -12,8 +12,8 @@ using SVP.API.Data;
 namespace SVP.API.Migrations
 {
     [DbContext(typeof(SVPContext))]
-    [Migration("20221218213401_UpdDoctorQual2")]
-    partial class UpdDoctorQual2
+    [Migration("20221220165606_Update")]
+    partial class Update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,7 +61,7 @@ namespace SVP.API.Migrations
 
                     b.Property<string>("Qualification")
                         .HasColumnType("text")
-                        .HasComment("Список квалификаций, описаны через запятую");
+                        .HasComment("Список квалификаций, описаны через запятую с пробелом");
 
                     b.HasKey("Id");
 
