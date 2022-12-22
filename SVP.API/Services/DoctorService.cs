@@ -31,10 +31,9 @@ public partial class SVPService: ISVPService
 
     public async Task<Doctor> EditDoctor(Doctor doctor)
     {
-        var _doctor = await _context.Doctors.FirstOrDefaultAsync(x => x.Id == doctor.Id);
-        _doctor = doctor;
+        _context.Doctors.Update(doctor);
         await _context.SaveChangesAsync();
-        return _doctor;
+        return doctor;
     }
 
     public async Task DeleteDoctor(long doctorId)

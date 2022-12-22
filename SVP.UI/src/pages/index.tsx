@@ -28,7 +28,10 @@ const PageRouter = () => {
                     <PatientPage/>
                 </Route>
 
-                <Route path={baseUrl + "doctor/:id"}>
+                <Route exact path={baseUrl + "doctor/:id"}>
+                    <DoctorPage/>
+                </Route>
+                <Route exact path={baseUrl + "doctor"}>
                     <DoctorPage/>
                 </Route>
             </Switch>

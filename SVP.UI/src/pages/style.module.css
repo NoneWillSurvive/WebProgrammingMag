@@ -11,3 +11,13 @@
 .footer {
     text-align: right;
 }
+
+.qualification__item {
+    position: relative;
+}
+
+.removeItem__btn {
+    position: absolute;
+    top: 9px;
+    right: 5px;
+}

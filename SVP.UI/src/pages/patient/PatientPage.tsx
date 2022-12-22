@@ -3,7 +3,7 @@ import {message, Skeleton} from "antd";
 import {PatientModel} from "../../models/patient.model";
 import {useParams} from "react-router-dom";
 import {ServiceContext} from "../../contexts/ServiceContext";
-import s from "./style.module.css";
+import s from "../style.module.css";
 import PatientForm from "./patientComponents/PatientForm";
 import {IllnessModel} from "../../models/illness.model";
 
@@ -40,12 +40,16 @@ const PatientPage = () => {
 
         const fetch = async () => {
             try {
-                const _patient = await patientApi.GetPatientById(+params.id);
+                if (params.id) {
+                    const _patient = await patientApi.GetPatientById(+params.id);
+                    if (!_patient.id) {
+                        throw new Error();
+                    }
+                    setPatient(_patient);
+                }
                 const _illnesses = await illnessApi.GetIllnesses();
-                setLoading(false);
-                setPatient(_patient);
-
                 setIllnesses(_illnesses);
+                setLoading(false);
             } catch (e) {
                 message.error("Не удалось получить данные о пациенте")
             }

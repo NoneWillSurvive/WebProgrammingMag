@@ -1,11 +1,10 @@
 import React, {useContext, useEffect} from 'react';
 import {Button, Form, Input, message, Modal, Radio, Select} from "antd";
 import {DeleteOutlined, ExclamationCircleOutlined, SaveOutlined, UndoOutlined} from "@ant-design/icons";
-import s from "../style.module.css";
+import s from "../../style.module.css";
 import {PatientModel} from "../../../models/patient.model";
 import {IllnessModel} from "../../../models/illness.model";
 import {ServiceContext} from "../../../contexts/ServiceContext";
-import {useHistory} from "react-router-dom";
 import {AppContext} from "../../../contexts/AppContext";
 
 type FormProps = {
@@ -17,7 +16,6 @@ const PatientForm: React.FC<FormProps> = (props) => {
     const {baseUrl} = useContext(AppContext);
     const {patientApi} = useContext(ServiceContext);
     const [form] = Form.useForm();
-    const history = useHistory();
 
     useEffect(() => {
         form.setFieldsValue({
@@ -233,13 +231,13 @@ const PatientForm: React.FC<FormProps> = (props) => {
                             className={s.button__marginRight}>
                         Отмена
                     </Button>
-                    {props.patient.id && <Button
+                    {props.patient.id ? <Button
                         onClick={confirmDeletePatient}
                         icon={<DeleteOutlined/>}
                         danger
                     >
                         Удалить пациента
-                    </Button>}
+                    </Button> : ""}
                 </Form.Item>
             </Form>
         </>
