@@ -14,7 +14,7 @@ public partial interface ISVPService
     
     public Task DeletePatient(long patientId);
 
-    public Task<bool> NeedToHospitalization(long patientId);
+    public Task<bool> NeedToHospitalization(Patient patient);
 
-    public Task<Doctor> GetRecommendedDoctorByPatientId(long patientId);
+    public Task<Doctor> GetRecommendedDoctorByPatientId(Patient patient);
 }

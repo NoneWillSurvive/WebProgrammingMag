@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import {AppContext} from "../contexts/AppContext";
 import {ServiceContext} from "../contexts/ServiceContext";
@@ -12,18 +12,18 @@ const App = () => {
 
     const baseUrl = "/", apiUrl = "/api/SVP/";
 
-    useEffect(() => {
-        type localStorageObj = { value: boolean, timestamp: Date };
-        const obj: localStorageObj = JSON.parse(window.localStorage.getItem("isAuthUser") || "");
-        const currentDate = new Date();
-        if (!obj.value || obj.timestamp < currentDate) {
-            const obj: localStorageObj = {
-                value: false,
-                timestamp: new Date()
-            }
-            window.localStorage.setItem("isAuthUser", JSON.stringify(obj));
-        }
-    }, [])
+    // useEffect(() => {
+    //     type localStorageObj = { value: boolean, timestamp: Date };
+    //     const obj: localStorageObj = JSON.parse(window.localStorage.getItem("isAuthUser") || "");
+    //     const currentDate = new Date();
+    //     if (!obj.value || obj.timestamp < currentDate) {
+    //         const obj: localStorageObj = {
+    //             value: false,
+    //             timestamp: new Date()
+    //         }
+    //         window.localStorage.setItem("isAuthUser", JSON.stringify(obj));
+    //     }
+    // }, [])
 
     return <AppContext.Provider value={{
         apiUrl: apiUrl,

@@ -12,8 +12,8 @@ using SVP.API.Data;
 namespace SVP.API.Migrations
 {
     [DbContext(typeof(SVPContext))]
-    [Migration("20221218200332_UpdatePatientModel")]
-    partial class UpdatePatientModel
+    [Migration("20221222144148_UpdModel")]
+    partial class UpdModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -59,8 +59,9 @@ namespace SVP.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("Quaification")
-                        .HasColumnType("text");
+                    b.Property<string>("Qualification")
+                        .HasColumnType("text")
+                        .HasComment("Список квалификаций, описаны через запятую с пробелом");
 
                     b.HasKey("Id");
 
@@ -79,6 +80,9 @@ namespace SVP.API.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -105,7 +109,7 @@ namespace SVP.API.Migrations
                         .HasColumnType("boolean")
                         .HasComment("Есть ли зависимость");
 
-                    b.Property<long?>("IllnessId")
+                    b.Property<long>("IllnessId")
                         .HasColumnType("bigint");
 
                     b.Property<byte>("LevelAnxiety")
@@ -131,7 +135,7 @@ namespace SVP.API.Migrations
                         .HasColumnType("boolean")
                         .HasComment("Нужна ли госпитализация");
 
-                    b.Property<long?>("RecommendedDoctorId")
+                    b.Property<long>("RecommendedDoctorId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -162,11 +166,15 @@ namespace SVP.API.Migrations
                 {
                     b.HasOne("SVP.API.Entities.Illness", "Illness")
                         .WithMany()
-                        .HasForeignKey("IllnessId");
+                        .HasForeignKey("IllnessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SVP.API.Entities.Doctor", "RecommendedDoctor")
                         .WithMany()
-                        .HasForeignKey("RecommendedDoctorId");
+                        .HasForeignKey("RecommendedDoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Illness");
 

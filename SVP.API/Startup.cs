@@ -43,7 +43,7 @@ namespace SVP.API
             });
             
             services.AddDbContext<SVPContext>((options) =>
-            {
+            { 
                 options.UseNpgsql(Configuration.GetConnectionString("SVPContext"));
             });
             

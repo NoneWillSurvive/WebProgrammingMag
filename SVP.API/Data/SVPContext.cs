@@ -19,4 +19,13 @@ public class SVPContext: DbContext
         
     }
     
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Patient>().HasOne(x => x.Illness).WithMany().HasForeignKey(x => x.IllnessId);
+        modelBuilder.Entity<Patient>().HasOne(x => x.RecommendedDoctor).WithMany().HasForeignKey(x => x.RecommendedDoctorId);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+    
 }

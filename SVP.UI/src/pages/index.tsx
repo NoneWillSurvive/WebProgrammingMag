@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {AppContext} from "../contexts/AppContext";
 import PatientPage from "./patient/PatientPage";
 import DoctorPage from "./doctor/DoctorPage";
-import AuthPage from "./auth/AuthPage";
 
 
 const PageRouter = () => {
@@ -13,19 +12,23 @@ const PageRouter = () => {
     return (
         <Router>
             <Switch>
-                <Route exact path={baseUrl + "auth"}>
-                    <AuthPage/>
-                </Route>
+                {/*<Route exact path={baseUrl + "auth"}>*/}
+                {/*    <AuthPage/>*/}
+                {/*</Route>*/}
 
-                <Route exact path={baseUrl}>
-                    <AuthPage/>
-                </Route>
+                {/*<Route exact path={baseUrl}>*/}
+                {/*    <AuthPage/>*/}
+                {/*</Route>*/}
 
                 <Route exact path={baseUrl + "patient/:id"}>
                     <PatientPage/>
                 </Route>
 
-                <Route exact path={baseUrl + "doctor/:id"}>
+                <Route exact path={baseUrl + "patient"}>
+                    <PatientPage/>
+                </Route>
+
+                <Route path={baseUrl + "doctor/:id"}>
                     <DoctorPage/>
                 </Route>
             </Switch>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#nullable enable
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace SVP.API.Entities;
@@ -15,6 +16,7 @@ public class Patient
     
     public string Name { get; set; }
     
+    public long IllnessId { get; set; }
     public Illness Illness { get; set; }
     
     [Comment("Уровень тревоги")]
@@ -36,6 +38,8 @@ public class Patient
     public bool NeedHospitalization { get; set; }
     
     [Comment("Рекомендуемый врач")]
-    public Doctor RecommendedDoctor { get; set; }
+    public Doctor? RecommendedDoctor { get; set; }
+    
+    public long? RecommendedDoctorId { get; set; }
     
 }

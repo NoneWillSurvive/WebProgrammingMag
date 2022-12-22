@@ -12,8 +12,8 @@ using SVP.API.Data;
 namespace SVP.API.Migrations
 {
     [DbContext(typeof(SVPContext))]
-    [Migration("20221220165606_Update")]
-    partial class Update
+    [Migration("20221222150804_UpdPatientModel")]
+    partial class UpdPatientModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,7 +109,7 @@ namespace SVP.API.Migrations
                         .HasColumnType("boolean")
                         .HasComment("Есть ли зависимость");
 
-                    b.Property<long?>("IllnessId")
+                    b.Property<long>("IllnessId")
                         .HasColumnType("bigint");
 
                     b.Property<byte>("LevelAnxiety")
@@ -129,6 +129,7 @@ namespace SVP.API.Migrations
                         .HasComment("Уровень безнадежности");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("NeedHospitalization")
@@ -166,7 +167,9 @@ namespace SVP.API.Migrations
                 {
                     b.HasOne("SVP.API.Entities.Illness", "Illness")
                         .WithMany()
-                        .HasForeignKey("IllnessId");
+                        .HasForeignKey("IllnessId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SVP.API.Entities.Doctor", "RecommendedDoctor")
                         .WithMany()

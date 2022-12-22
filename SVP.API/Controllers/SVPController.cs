@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SVP.API.Entities;
 using SVP.API.Interfaces;
@@ -24,14 +25,81 @@ public class SVPController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult<Patient>> AddPatient(Patient patient)
+    public async Task<ActionResult<Patient>> AddPatient(
+        bool Gender,
+        byte Age,
+        string Name,
+        [FromBody] Illness Illness,
+        byte LevelAnxiety,
+        byte LevelDepression,
+        byte LevelHopelessness,
+        byte LevelAsthenicSyndrome,
+        bool HasAddiction
+    )
     {
+        var patient = new Patient()
+        {
+            Gender = Gender,
+            Age = Age,
+            Name = Name,
+            IllnessId = Illness.Id,
+            Illness = Illness,
+            LevelAnxiety = LevelAnxiety,
+            LevelDepression = LevelDepression,
+            LevelHopelessness = LevelHopelessness,
+            LevelAsthenicSyndrome = LevelAsthenicSyndrome,
+            HasAddiction = HasAddiction,
+            NeedHospitalization = false,
+        };
+        var needToHospitalization = await _service.NeedToHospitalization(patient);
+        var recommendedDoctor = await _service.GetRecommendedDoctorByPatientId(patient);
+
+        patient.NeedHospitalization = needToHospitalization;
+        patient.RecommendedDoctorId = recommendedDoctor?.Id;
+        patient.Illness = null;
+            
         return Ok(await _service.AddPatient(patient));
     }
 
     [HttpPut]
-    public async Task<ActionResult<Patient>> EditPatient(Patient patient)
+    public async Task<ActionResult<Patient>> EditPatient(
+        long Id,
+        bool Gender,
+        byte Age,
+        string Name,
+        [FromBody] Illness Illness,
+        byte LevelAnxiety,
+        byte LevelDepression,
+        byte LevelHopelessness,
+        byte LevelAsthenicSyndrome,
+        bool HasAddiction
+    )
     {
+        
+        var patient = new Patient()
+        {
+            Id = Id,
+            Gender = Gender,
+            Age = Age,
+            Name = Name,
+            IllnessId = Illness.Id,
+            Illness = Illness,
+            LevelAnxiety = LevelAnxiety,
+            LevelDepression = LevelDepression,
+            LevelHopelessness = LevelHopelessness,
+            LevelAsthenicSyndrome = LevelAsthenicSyndrome,
+            HasAddiction = HasAddiction,
+            NeedHospitalization = false,
+            RecommendedDoctorId = null,
+        };
+        
+        var needToHospitalization = await _service.NeedToHospitalization(patient);
+        var recommendedDoctor = await _service.GetRecommendedDoctorByPatientId(patient);
+
+        patient.NeedHospitalization = needToHospitalization;
+        patient.RecommendedDoctorId = recommendedDoctor?.Id;
+        patient.Illness = null;
+        
         return Ok(await _service.EditPatient(patient));
     }
 
@@ -63,6 +131,12 @@ public class SVPController : Controller
         ));
     }
 
+    [HttpGet]
+    public async Task<ActionResult<List<Illness>>> GetIllnesses()
+    {
+        return Ok(await _service.GetIllnesses());
+    }
+    
     // [HttpGet]
     // public Task<Doctor> GetRecommendedDoctorByPatientId()
     // {
