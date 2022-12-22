@@ -13,7 +13,7 @@ export declare module PatientModel {
         gender: boolean,
         age: number,
         name: string,
-        illness: IllnessModel.Illness,
+        illness: IllnessModel.Illness | null,
         levelAnxiety: number,
         levelDepression: number,
         levelHopelessness: number,

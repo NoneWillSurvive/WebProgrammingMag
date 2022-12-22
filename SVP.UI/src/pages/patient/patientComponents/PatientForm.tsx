@@ -19,8 +19,15 @@ const PatientForm: React.FC<FormProps> = (props) => {
 
     useEffect(() => {
         form.setFieldsValue({
-            ...props.patient,
-            illness: JSON.stringify(props.patient.illness),
+            gender: props.patient.gender ? props.patient.gender : null,
+            age: props.patient.age ? props.patient.age : null,
+            name: props.patient.name ? props.patient.name : null,
+            levelAnxiety: props.patient.levelAnxiety ? props.patient.levelAnxiety : null,
+            levelDepression: props.patient.levelDepression ? props.patient.levelDepression : null,
+            levelHopelessness: props.patient.levelHopelessness ? props.patient.levelHopelessness : null,
+            levelAsthenicSyndrome: props.patient.levelAsthenicSyndrome ? props.patient.levelAsthenicSyndrome : null,
+            hasAddiction: props.patient.hasAddiction,
+            illness: props.patient.illness ? JSON.stringify(props.patient.illness) : null,
             recommendedDoctorName: props.patient.recommendedDoctor?.id ?
                 `${props.patient.recommendedDoctor?.name}: ${props.patient.recommendedDoctor?.qualification}`
                 : ""
@@ -29,8 +36,15 @@ const PatientForm: React.FC<FormProps> = (props) => {
 
     const setFormFieldsBeforeChanges = () => {
         form.setFieldsValue({
-            ...props.patient,
-            illness: JSON.stringify(props.patient.illness),
+            gender: props.patient.gender ? props.patient.gender : null,
+            age: props.patient.age,
+            name: props.patient.name ? props.patient.name : null,
+            levelAnxiety: props.patient.levelAnxiety ? props.patient.levelAnxiety : null,
+            levelDepression: props.patient.levelDepression ? props.patient.levelDepression : null,
+            levelHopelessness: props.patient.levelHopelessness ? props.patient.levelHopelessness : null,
+            levelAsthenicSyndrome: props.patient.levelAsthenicSyndrome ? props.patient.levelAsthenicSyndrome : null,
+            hasAddiction: props.patient.hasAddiction,
+            illness: props.patient.illness ? JSON.stringify(props.patient.illness) : null,
             recommendedDoctorName: props.patient.recommendedDoctor?.id ?
                 `${props.patient.recommendedDoctor?.name}: ${props.patient.recommendedDoctor?.qualification}`
                 : ""
@@ -209,7 +223,7 @@ const PatientForm: React.FC<FormProps> = (props) => {
                 <Form.Item label={"Заболевание"} name={"illness"}
                            rules={[{required: true, message: 'Введите значение'}]}
                 >
-                    <Select options={illnessOptions}/>
+                    <Select options={illnessOptions} placeholder={"Укажите заболевание"}/>
                 </Form.Item>
 
                 <Form.Item label={"Нужна ли госпитализация"} name={"needHospitalization"}>

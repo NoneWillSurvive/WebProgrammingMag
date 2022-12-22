@@ -18,10 +18,10 @@ export class PatientService {
 
     async AddPatient(payload: PatientModel.IPatient): Promise<PatientModel.IPatient> {
         return await axios.post(this.apiUrl + "AddPatient", {
-            id: payload.illness.id,
-            name: payload.illness.name,
-            codeMKB: payload.illness.codeMKB,
-            type: payload.illness.type
+            id: payload.illness!.id,
+            name: payload.illness!.name,
+            codeMKB: payload.illness!.codeMKB,
+            type: payload.illness!.type
         }, {
             params: {
                 gender: payload.gender,
@@ -39,10 +39,10 @@ export class PatientService {
 
     async EditPatient(payload: PatientModel.IPatient): Promise<PatientModel.IPatient> {
         return await axios.put(this.apiUrl + "EditPatient", {
-            id: payload.illness.id,
-            name: payload.illness.name,
-            codeMKB: payload.illness.codeMKB,
-            type: payload.illness.type
+            id: payload.illness!.id,
+            name: payload.illness!.name,
+            codeMKB: payload.illness!.codeMKB,
+            type: payload.illness!.type
         }, {
             params: {
                 id: payload.id,

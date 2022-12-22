@@ -13,12 +13,7 @@ const initialStatePatient: PatientModel.IPatient = {
     gender: true,
     age: 0,
     name: "",
-    illness: {
-        name: "Здоровый",
-        id: 0,
-        type: "Здоровый",
-        codeMKB: ""
-    },
+    illness: null,
     levelAnxiety: 0,
     levelDepression: 0,
     levelHopelessness: 0,
@@ -35,7 +30,6 @@ const PatientPage = () => {
     const [loading, setLoading] = useState(true);
     const params = useParams<{ id: string }>();
 
-    console.log("params: ", params);
     useEffect(() => {
 
         const fetch = async () => {

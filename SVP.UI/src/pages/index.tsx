@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {AppContext} from "../contexts/AppContext";
 import PatientPage from "./patient/PatientPage";
 import DoctorPage from "./doctor/DoctorPage";
+import IllnessPage from "./illness/IllnessPage";
 
 
 const PageRouter = () => {
@@ -33,6 +34,13 @@ const PageRouter = () => {
                 </Route>
                 <Route exact path={baseUrl + "doctor"}>
                     <DoctorPage/>
+                </Route>
+
+                <Route exact path={baseUrl + "illness/:id"}>
+                    <IllnessPage/>
+                </Route>
+                <Route exact path={baseUrl + "illness"}>
+                    <IllnessPage/>
                 </Route>
             </Switch>
         </Router>

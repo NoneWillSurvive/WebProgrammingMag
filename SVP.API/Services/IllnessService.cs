@@ -33,13 +33,12 @@ public partial class SVPService: ISVPService
 
     public async Task<Illness> EditIllness(Illness illness)
     {
-        var _illness = await _context.Illnesses.FirstOrDefaultAsync(x => x.Id == illness.Id);
-        _illness = illness;
+        _context.Illnesses.Update(illness);
         await _context.SaveChangesAsync();
-        return _illness;
+        return illness;
     }
 
-    async Task ISVPService.DeleteIllness(long illnessId)
+    public async Task DeleteIllness(long illnessId)
     {
         var illness = await _context.Illnesses.FirstOrDefaultAsync(x => x.Id == illnessId);
         if (illness is not null)

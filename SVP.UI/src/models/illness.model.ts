@@ -3,7 +3,6 @@ export declare module IllnessModel {
         id: number,
         name: string,
         codeMKB: string,
-
-        type: string
+        type: string | null
     }
 }

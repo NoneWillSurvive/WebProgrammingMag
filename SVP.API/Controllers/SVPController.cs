@@ -180,6 +180,53 @@ public class SVPController : Controller
         return Ok(await _service.GetIllnesses());
     }
     
+    [HttpGet]
+    public async Task<ActionResult<Doctor>> GetIllnessById(long illnessId)
+    {
+        return Ok(await _service.GetIllnessById(illnessId));
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<Doctor>> AddIllness(
+        string Name,
+        string CodeMKB,
+        string Type
+    )
+    {
+        var illness = new Illness()
+        {
+            Name = Name,
+            CodeMKB = CodeMKB,
+            Type = Type
+        };
+        return Ok(await _service.AddIllness(illness));
+    }
+    
+    [HttpPut]
+    public async Task<ActionResult<Doctor>> EditIllness(
+        long Id,
+        string Name,
+        string CodeMKB,
+        string Type
+    )
+    {
+        var illness = new Illness()
+        {
+            Id = Id,
+            Name = Name,
+            CodeMKB = CodeMKB,
+            Type = Type
+        };
+        return Ok(await _service.EditIllness(illness));
+    }
+    
+    [HttpDelete]
+    public async Task<ActionResult<Doctor>> DeleteIllness(long illnessId)
+    {
+        await _service.DeleteIllness(illnessId);
+        return Ok();
+    }
+    
     // [HttpGet]
     // public Task<Doctor> GetRecommendedDoctorByPatientId()
     // {
