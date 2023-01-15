@@ -12,6 +12,7 @@ import {
     UndoOutlined
 } from "@ant-design/icons";
 import s from "../../style.module.css";
+import {useHistory} from "react-router-dom";
 
 type FormProps = {
     doctor: DoctorModel.IDoctor
@@ -21,6 +22,7 @@ const DoctorForm: React.FC<FormProps> = (props) => {
     const {baseUrl} = useContext(AppContext);
     const {doctorApi} = useContext(ServiceContext);
     const [form] = Form.useForm();
+    const history = useHistory();
 
     useEffect(() => {
         form.setFieldsValue({
@@ -55,9 +57,9 @@ const DoctorForm: React.FC<FormProps> = (props) => {
 
     const AddDoctor = async (doctor: DoctorModel.IDoctor) => {
         try {
-            const savedDoctor = await doctorApi.AddDoctor(doctor);
-            alert("Доктор успешно сохранен");
-            window.location.href = baseUrl + `doctor/${savedDoctor.id}`
+            await doctorApi.AddDoctor(doctor);
+            message.success("Доктор успешно сохранен");
+            history.push(baseUrl + `doctor`);
         } catch (e) {
             message.error("Не удалось сохранить доктора");
             console.error(e);
@@ -68,6 +70,7 @@ const DoctorForm: React.FC<FormProps> = (props) => {
         try {
             await doctorApi.EditDoctor(doctor);
             message.success("Доктор успешно отредактирован");
+            history.push(baseUrl + `doctor`);
         } catch (e) {
             message.error("Не удалось отредактировать доктора");
             console.error(e);
@@ -96,8 +99,8 @@ const DoctorForm: React.FC<FormProps> = (props) => {
     const deleteDoctor = async () => {
         try {
             await doctorApi.DeleteDoctor(props.doctor.id);
-            alert("Доктор успешно удален");
-            window.location.href = baseUrl + `doctor`
+            message.success("Доктор успешно удален");
+            history.push(baseUrl + `doctor`);
         } catch (e) {
             message.error("Не удалось удалить доктора");
             console.error(e);

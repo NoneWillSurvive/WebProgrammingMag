@@ -6,6 +6,8 @@ namespace SVP.API.Interfaces;
 
 public partial interface ISVPService
 {
+
+    public Task<List<Patient>> GetPatients();
     public Task<Patient> GetPatientById(long patientId);
     
     public Task<Patient> AddPatient(Patient patient);

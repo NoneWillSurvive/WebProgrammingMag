@@ -9,6 +9,11 @@ export class DoctorService {
         this.apiUrl = apiUrl;
     }
 
+    async GetDoctors(): Promise<Array<DoctorModel.IDoctor>> {
+        return await axios.get(this.apiUrl + "GetDoctors")
+            .then(res => res.data)
+    }
+
     async GetDoctorById(id: number): Promise<DoctorModel.IDoctor> {
         return await axios.get(this.apiUrl + "GetDoctorById", {
             params: {

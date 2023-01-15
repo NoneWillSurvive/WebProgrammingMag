@@ -5,6 +5,7 @@ import {ServiceContext} from "../../../contexts/ServiceContext";
 import {Button, Form, Input, message, Modal, Select} from "antd";
 import {DeleteOutlined, ExclamationCircleOutlined, SaveOutlined, UndoOutlined} from "@ant-design/icons";
 import s from "../../style.module.css";
+import {useHistory} from "react-router-dom";
 
 const typesArray = [
     "Депрессивное расстройство",
@@ -19,11 +20,12 @@ const typesArray = [
 type IllnessFormProps = {
     illness: IllnessModel.Illness
 }
-const IllnessForm: React.FC<IllnessFormProps> = (props, context) => {
+const IllnessForm: React.FC<IllnessFormProps> = (props) => {
 
     const {baseUrl} = useContext(AppContext);
     const {illnessApi} = useContext(ServiceContext);
     const [form] = Form.useForm();
+    const history = useHistory();
 
     useEffect(() => {
         form.setFieldsValue(props.illness);
@@ -47,9 +49,9 @@ const IllnessForm: React.FC<IllnessFormProps> = (props, context) => {
 
     const AddIllness = async (data: IllnessModel.Illness) => {
         try {
-            const savedPatient = await illnessApi.AddIllness(data);
-            alert("Заболевание успешно сохранено");
-            window.location.href = baseUrl + `illness/${savedPatient.id}`
+            await illnessApi.AddIllness(data);
+            message.success("Заболевание успешно сохранено");
+            history.push(baseUrl + `illness`);
         } catch (e) {
             message.error("Не удалось сохранить заболевание");
             console.error(e);
@@ -60,6 +62,7 @@ const IllnessForm: React.FC<IllnessFormProps> = (props, context) => {
         try {
             await illnessApi.EditIllness(data);
             message.success("Заболевание успешно отредактировано");
+            history.push(baseUrl + `illness`);
         } catch (e) {
             message.error("Не удалось отредактировать заболевание");
             console.error(e);
@@ -80,8 +83,8 @@ const IllnessForm: React.FC<IllnessFormProps> = (props, context) => {
     const deleteIllness = async () => {
         try {
             await illnessApi.DeleteIllness(props.illness.id);
-            alert("Заболевание успешно удалено");
-            window.location.href = baseUrl + `illness`
+            message.success("Заболевание успешно удалено");
+            history.push(baseUrl + `illness`);
         } catch (e) {
             message.error("Не удалось удалить заболевание");
             console.error(e);

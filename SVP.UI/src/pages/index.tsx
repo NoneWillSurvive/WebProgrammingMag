@@ -4,6 +4,10 @@ import {AppContext} from "../contexts/AppContext";
 import PatientPage from "./patient/PatientPage";
 import DoctorPage from "./doctor/DoctorPage";
 import IllnessPage from "./illness/IllnessPage";
+import MainPage from "./main/MainPage";
+import PatientsTable from "./patient/PatientsTable";
+import DoctorsTable from "./doctor/DoctorsTable";
+import IllnessesTable from "./illness/IllnessesTable";
 
 
 const PageRouter = () => {
@@ -21,26 +25,30 @@ const PageRouter = () => {
                 {/*    <AuthPage/>*/}
                 {/*</Route>*/}
 
+                <Route exact path={baseUrl + "/"}>
+                    <MainPage/>
+                </Route>
+
                 <Route exact path={baseUrl + "patient/:id"}>
                     <PatientPage/>
                 </Route>
 
                 <Route exact path={baseUrl + "patient"}>
-                    <PatientPage/>
+                    <PatientsTable/>
                 </Route>
 
                 <Route exact path={baseUrl + "doctor/:id"}>
                     <DoctorPage/>
                 </Route>
                 <Route exact path={baseUrl + "doctor"}>
-                    <DoctorPage/>
+                    <DoctorsTable/>
                 </Route>
 
                 <Route exact path={baseUrl + "illness/:id"}>
                     <IllnessPage/>
                 </Route>
                 <Route exact path={baseUrl + "illness"}>
-                    <IllnessPage/>
+                    <IllnessesTable/>
                 </Route>
             </Switch>
         </Router>

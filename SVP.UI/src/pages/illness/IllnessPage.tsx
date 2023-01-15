@@ -1,10 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {ServiceContext} from "../../contexts/ServiceContext";
 import {IllnessModel} from "../../models/illness.model";
-import {useParams} from "react-router-dom";
-import {message, Skeleton} from "antd";
+import {useHistory, useParams} from "react-router-dom";
+import {Button, message, Skeleton} from "antd";
 import s from "../style.module.css";
 import IllnessForm from "./IllnessComponents/IllnessForm";
+import {ArrowLeftOutlined} from "@ant-design/icons";
 
 const initialStateIllness: IllnessModel.Illness = {
     id: 0,
@@ -18,12 +19,13 @@ const IllnessPage = () => {
     const [illness, setIllness] = useState<IllnessModel.Illness>(initialStateIllness);
     const [loading, setLoading] = useState(true);
     const params = useParams<{ id: string }>();
+    const history = useHistory();
 
     useEffect(() => {
 
         const fetch = async () => {
             try {
-                if (params.id) {
+                if (params.id && params.id !== "add") {
                     const _illness = await illnessApi.GetIllnessById(+params.id);
                     if (!_illness.id) {
                         throw new Error();
@@ -38,12 +40,20 @@ const IllnessPage = () => {
         fetch()
     }, [])
 
+    const toMaiPage = () => {
+        history.push("/illness");
+    }
+
     if (loading) {
         return <Skeleton/>
     }
 
     return (
         <div className={s.container}>
+
+            <Button icon={<ArrowLeftOutlined/>} onClick={toMaiPage}>
+                Назад
+            </Button>
 
             <h3>Модуль "Болезнь"</h3>
 

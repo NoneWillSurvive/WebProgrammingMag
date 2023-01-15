@@ -6,6 +6,7 @@ import {PatientModel} from "../../../models/patient.model";
 import {IllnessModel} from "../../../models/illness.model";
 import {ServiceContext} from "../../../contexts/ServiceContext";
 import {AppContext} from "../../../contexts/AppContext";
+import {useHistory} from "react-router-dom";
 
 type FormProps = {
     patient: PatientModel.IPatient
@@ -16,6 +17,7 @@ const PatientForm: React.FC<FormProps> = (props) => {
     const {baseUrl} = useContext(AppContext);
     const {patientApi} = useContext(ServiceContext);
     const [form] = Form.useForm();
+    const history = useHistory();
 
     useEffect(() => {
         form.setFieldsValue({
@@ -65,8 +67,8 @@ const PatientForm: React.FC<FormProps> = (props) => {
     const deletePatient = async () => {
         try {
             await patientApi.DeletePatient(props.patient.id);
-            alert("Пациент успешно удален");
-            window.location.href = baseUrl + `patient`
+            message.success("Пациент успешно удален");
+            history.push(baseUrl + `/patient`)
         } catch (e) {
             message.error("Не удалось удалить пациента");
             console.error(e);
@@ -89,9 +91,9 @@ const PatientForm: React.FC<FormProps> = (props) => {
 
     const AddPatient = async (data: PatientModel.IPatient) => {
         try {
-            const savedPatient = await patientApi.AddPatient(data);
-            alert("Пациент успешно сохранен");
-            window.location.href = baseUrl + `patient/${savedPatient.id}`
+            await patientApi.AddPatient(data);
+            message.success("Пациент успешно сохранен");
+            history.push(baseUrl + `/patient`)
         } catch (e) {
             message.error("Не удалось сохранить пациента");
             console.error(e);
@@ -102,6 +104,7 @@ const PatientForm: React.FC<FormProps> = (props) => {
         try {
             await patientApi.EditPatient(data);
             message.success("Пациент успешно отредактирован");
+            history.push(baseUrl + `/patient`)
         } catch (e) {
             message.error("Не удалось отредактировать пациента");
             console.error(e);

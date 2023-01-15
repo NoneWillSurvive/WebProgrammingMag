@@ -16,8 +16,13 @@ public class SVPController : Controller
     {
         _service = service;
     }
-
-
+    
+    [HttpGet]
+    public async Task<ActionResult<List<Patient>>> GetPatients()
+    {
+        return Ok(await _service.GetPatients());
+    }
+    
     [HttpGet]
     public async Task<ActionResult<Patient>> GetPatientById(long patientId)
     {
@@ -130,7 +135,13 @@ public class SVPController : Controller
             isPatient, login, password, userName, age, gender
         ));
     }
-
+    
+    [HttpGet]
+    public async Task<ActionResult<Doctor>> GetDoctors()
+    {
+        return Ok(await _service.GetDoctors());
+    }
+    
     [HttpGet]
     public async Task<ActionResult<Doctor>> GetDoctorById(long doctorId)
     {

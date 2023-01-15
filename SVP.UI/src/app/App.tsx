@@ -7,10 +7,16 @@ import {PatientService} from "../services/patient.service";
 import {IllnessService} from "../services/illness.service";
 import {DoctorService} from "../services/doctor.service";
 import {AuthService} from "../services/auth.service";
+import {loadMessages, locale as localeDevexpress} from "devextreme/localization";
+import ruMessages from "devextreme/localization/messages/ru.json";
+import 'devextreme/dist/css/dx.light.css';
 
 const App = () => {
 
     const baseUrl = "/", apiUrl = "/api/SVP/";
+
+    loadMessages(ruMessages);
+    localeDevexpress("ru-RU");
 
     // useEffect(() => {
     //     type localStorageObj = { value: boolean, timestamp: Date };

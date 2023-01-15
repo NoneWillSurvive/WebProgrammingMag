@@ -27,6 +27,16 @@ public partial class SVPService: ISVPService
         _context = context;
     }
 
+    public async Task<List<Patient>> GetPatients()
+    {
+        var patients = await _context.Patients
+            .Include(x => x.Illness)
+            .Include(x => x.RecommendedDoctor)
+            .ToListAsync();
+
+        return patients;
+    }
+
     public async Task<Patient> GetPatientById(long patientId)
     {
         var patient = await _context.Patients
